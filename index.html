@@ -10,13 +10,33 @@
   <body>
     <a-scene renderer="colorManagement: true;">
         <a-assets>
+          <a-asset-item id="map" src="https://cdn.jsdelivr.net/gh/howchanghong/webVR@master/assets/map.glb"></a-asset-item>
           <a-asset-item id="changiAirportTower" src="https://cdn.jsdelivr.net/gh/howchanghong/webVR@master/assets/changiAirportTower.gltf"></a-asset-item>
         </a-assets>
-      <a-entity environment="preset:forest; lighting: none;"></a-entity> 
+      <a-entity environment="preset:threetowers; dressing: none;"></a-entity> 
       <a-entity light="type: ambient; color: #CCC; intensity: 0.5" ></a-entity>
       <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="0 1.5 3"></a-entity>
-      <a-entity camera="active: true" look-controls wasd-controls="fly:true" position="0 1.6 0"></a-entity>
-      <a-entity gltf-model="#changiAirportTower" position="-1.05 0 -4.394" scale="0.1 0.1 0.1"></a-entity>
+      <!-- <a-entity camera="active: true" look-controls wasd-controls="fly:true" position="0 1.6 0"></a-entity> -->
+      <a-entity id="cameraRig" position="0 0 1.8" movement-controls="speed: 0.008; fly: true; camera: #head;" wasd-controls="fly:true" look-controls position-limit="ymin: -1; ymax: 100;">
+        <!-- camera -->
+        <a-entity id="head" camera="active: true" look-controls position="0 1.6 0"><a-entity cursor="rayOrigin: mouse;" raycaster="far: 2;"></a-entity></a-entity>
+        <!-- hand controls -->
+        <a-mixin id="teleport"
+                 teleport-controls="cameraRig: #cameraRig; button: trigger; teleportOrigin: #head; collisionEntities: #ground; curveShootingSpeed: 25; curveNumberPoints: 100;"
+        ></a-mixin>
+        <a-mixin id="handcursor" cursor="downEvents: triggerdown; upEvents: triggerup;" raycaster="far: 2; showLine: true;"></a-mixin>
+        <a-entity id="left-hand" mixin="teleport"
+                  oculus-touch-controls="hand: left" vive-controls="hand: left" windows-motion-controls="hand: left;"
+                  daydream-controls="hand: left" gearvr-controls="hand: left"></a-entity>
+        <a-entity id="right-hand" mixin="teleport"
+                  oculus-touch-controls="hand: right" vive-controls="hand: right" windows-motion-controls="hand: right;"
+                  daydream-controls="hand: right" gearvr-controls="hand: right"></a-entity>
+        <!-- menu -->
+        <a-plane id="menu" color="#404040" position="0 2 -1" visible="false"></a-entity>
+      </a-entity>
+
+      <a-entity gltf-model="#map" position="0 0.001 0"></a-entity>
+      <a-entity gltf-model="#changiAirportTower" position="1.88 0 -0.03" scale="0.03 0.03 0.03"></a-entity>
       
     </a-scene>
   </body>
