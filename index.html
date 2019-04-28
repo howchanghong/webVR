@@ -20,7 +20,7 @@
       <a-entity light="type: ambient; color: #CCC; intensity: 0.5" ></a-entity>
       <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="0 1.5 3"></a-entity>
       <!-- <a-entity camera="active: true" look-controls wasd-controls="fly:true" position="0 1.6 0"></a-entity> -->
-      <a-entity id="cameraRig" position="0 0 1.8" movement-controls="speed: 0.008; fly: true; camera: #head;" wasd-controls="fly:true" multitouch-look-controls look-controls position-limit="ymin: -1; ymax: 100;">
+      <a-entity id="cameraRig" position="0 0 1.8" movement-controls="speed: 0.008; fly: true; camera: #head;" wasd-controls="fly:true" multitouch-look-controls look-controls="touchenabled: false" position-limit="ymin: -1; ymax: 100;">
         <!-- camera -->
         <a-entity id="head" camera="active: true" look-controls position="0 1.6 0"><a-entity cursor="rayOrigin: mouse;" raycaster="far: 2;"></a-entity></a-entity>
         <!-- hand controls -->
